@@ -232,7 +232,52 @@
 
                 </ul>
             </li>
+            @can('access_permission')
+            <li class=" @yield('openModAccess') ">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text">
+                        M. Accesos
+                    </span>
 
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+                    <li class=" @yield('activeListPermission') ">
+                        <a href="{{ route('permission.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Permisos
+                        </a>
+
+                        <b class="arrow"></b>
+
+                    </li>
+
+                    <li class=" @yield('activeListRoles') ">
+                        <a href="{{ route('role.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Roles
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class=" @yield('activeListUsers') ">
+                        <a href="{{ route('user.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Usuarios
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            @endcan
             <li class=" @yield('activeMod') ">
                 <a href="#">
                     <i class="menu-icon fa fa-file-pdf-o"></i>
