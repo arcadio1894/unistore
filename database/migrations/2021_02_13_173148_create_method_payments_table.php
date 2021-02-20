@@ -17,9 +17,6 @@ class CreateMethodPaymentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('shop_id');
-            $table->foreign('shop_id')
-                ->references('id')->on('shops');
             $table->timestamps();
         });
     }
