@@ -63,6 +63,17 @@ Route::middleware('auth')->group(function (){
             ->middleware('permission:update_store');
         Route::post('category/destroy', 'CategoryController@destroy')->name('category.destroy')
             ->middleware('permission:destroy_store');
+
+
+        
+        Route::get('payment', 'MethodsPaymentController@index')->name('payment.index')
+        ->middleware('permission:create_store');
+        Route::post('payment/store', 'MethodsPaymentController@store')->name('payment.store')
+        ->middleware('permission:create_store');
+        Route::post('payment/update', 'MethodsPaymentController@update')->name('payment.update')
+        ->middleware('permission:update_store');
+        Route::post('payment/destroy', 'MethodsPaymentController@destroy')->name('payment.destroy')
+        ->middleware('permission:destroy_store');
     });
 });
 
