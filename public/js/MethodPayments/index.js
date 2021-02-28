@@ -53,7 +53,7 @@ function storeMethod() {
                 icon: 'success',
                 heading: 'Éxito'
             });
-            $modalCreate.modal('hide');
+            $modalEdit.modal('hide');
             setTimeout( function () {
                 location.reload();
             }, 4000 )
@@ -88,7 +88,7 @@ function openModalEdit() {
     $modalEdit.find('[id=payment_id]').val(payment_id);
     $modalEdit.find('[id=nameE]').val(name);
     var path = document.location.origin;
-    var completePath = path + '/images/category/' + image;
+    var completePath = path + '/images/methodsPayment/' + image;
     $modalEdit.find('[id=image-preview]').attr('src', completePath);
 
     $('#shopE option[value='+shop_id+']').attr('selected', true);
@@ -124,7 +124,6 @@ function updateMethod() {
             }, 4000 )
         },
         error: function (data) {
-            console.log(data.responseJSON.errors.name);
             for ( var property in data.responseJSON.errors ) {
                 $.toast({
                     text:data.responseJSON.errors[property],
@@ -156,7 +155,7 @@ function openModalDelete() {
     $modalDelete.find('[id=shopDelete]').html(shop_name);
 
     var path = document.location.origin;
-    var completePath = path + '/images/category/' + image;
+    var completePath = path + '/images/methodsPayment/' + image;
     $modalDelete.find('[id=imageDelete]').attr('src', completePath);
 
     $modalDelete.modal('show');
@@ -173,7 +172,6 @@ function destroyMethod() {
         processData:false,
         contentType:false,
         success: function (data) {
-            console.log(data);
             $.toast({
                 text: data.message,
                 showHideTransition: 'slide',
@@ -192,7 +190,6 @@ function destroyMethod() {
             }, 4000 )
         },
         error: function (data) {
-            console.log(data.responseJSON.errors.name);
             for ( var property in data.responseJSON.errors ) {
                 $.toast({
                     text:data.responseJSON.errors[property],
@@ -207,8 +204,6 @@ function destroyMethod() {
                     heading: 'Error'
                 });
             }
-
-
         },
     });
 }

@@ -1,7 +1,7 @@
 @extends('layouts.appDashboard')
 
 @section('styles')
-
+<link rel="stylesheet" href="{{ asset('intranet/assets/css/select2.min.css') }}" />
 @endsection
 
 @section('openModPayment')
@@ -54,17 +54,21 @@
             <td>{{ $metod->name }}</td>
             <td>
                 @if($metod->image)
-                    <img src="{{ asset('images/category/'.$metod->image) }}" alt="{{ $metod->name }}" width="100px" height="100px">
+                    <img src="{{ asset('images/methodsPayment/'.$metod->image) }}" alt="{{ $metod->name }}" width="100px" height="100px">
                 @else
                     <img src="{{ asset('images/no_image.jpg') }}" alt="No image" width="100px" height="100px">
                 @endif
             </td>
-            <td></td>
             <td>
-
-              <!--  <a data-edit="{{ $metod->id }}" data-shop="{{ $metod->shop_id }}" data-image="{{ $category->image }}" data-description="{{ $category->description }}" data-name="{{ $category->name }}"  class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-
-                <a data-delete="{{ $metod->id }}" data-shop="{{ $metod->shop->name }}" data-image="{{ $category->image }}" data-description="{{ $category->description }}" data-name="{{ $category->name }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>-->
+            <ul>
+            @foreach($metod->tiendas as $tienda)
+                 <li>{{$tienda['name']}}</li>
+            @endforeach
+            <ul>
+            </td>
+            <td>
+                <a data-edit="{{ $metod->id }}" data-image="{{ $metod->image }}"  data-name="{{ $metod->name }}"   class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                <a data-delete="{{ $metod->id }}"  data-image="{{ $metod->image }}"  data-name="{{ $metod->name }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
 
             </td>
         </tr>
@@ -82,10 +86,10 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="name"> Categoría </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="name">Metodo de Pago </label>
 
                             <div class="col-sm-9">
-                                <input type="text" id="name" name="name" class="col-xs-10 col-sm-10" placeholder="Ejm: Laptops" required />
+                                <input type="text" id="name" name="name" class="col-xs-10 col-sm-10" placeholder="Ejm: Paypal" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -99,7 +103,7 @@
                             <label class="col-sm-3 control-label no-padding-right" for="shop"> Tienda </label>
 
                             <div class="col-sm-9">
-                                <select name="shop" id="shop" class="select2 col-xs-10 col-sm-10" multiple="multiple">
+                                <select name="shop[]" id="shop" class="select2" multiple="multiple">
                                     @foreach( $shops as $shop )
                                         <option value="{{ $shop->id }}">{{ $shop->name }}</option>
                                     @endforeach
@@ -146,7 +150,7 @@
                             <label class="col-sm-3 control-label no-padding-right" for="shopE"> Tienda </label>
 
                             <div class="col-sm-9">
-                                <select name="shop" id="shopE" class="col-xs-10 col-sm-10 select2 multiple">
+                                <select name="shop[]" id="shopE" class="select2" multiple="multiple">
                                     @foreach( $shops as $shop )
                                         <option value="{{ $shop->id }}">{{ $shop->name }}</option>
                                     @endforeach
@@ -176,7 +180,6 @@
                     <div class="modal-body">
                         <input type="hidden" id="payment_id" name="payment_id">
                         <p id="nameDelete"></p>
-                        <p id="shopDelete"></p>
                         <img src="" id="imageDelete" alt="Imagen Preview" width="100px" height="100px" >
                     </div>
                     <div class="modal-footer">
@@ -191,4 +194,15 @@
 
 @section('scripts')
     <script src="{{ asset('js/methodPayments/index.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.select2').css('width','300px').select2({allowClear:true})
+                .on('change', function(){
+                    $(this).closest('form').validate().element($(this));
+                });
+
+            })
+    </script>
+
 @endsection

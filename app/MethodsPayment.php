@@ -13,4 +13,14 @@ class MethodsPayment extends Model
     protected $fillable = ['name','image'];
 
     protected $dates = ['deleted_at'];
+
+    public function sales()
+    {
+        $this->hasMany('App\Sale');
+    }
+
+    public function method_shop()
+    {
+        return $this->belongsTo('App\MethodsPayment_Shops');
+    }
 }

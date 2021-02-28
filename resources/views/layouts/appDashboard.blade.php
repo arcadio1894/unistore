@@ -354,6 +354,9 @@
 <script src="{{ asset('toast/jquery.toast.min.js') }}"></script>
 
 <!-- inline scripts related to this page -->
+
+
+
 @yield('scripts')
 
 </body>
