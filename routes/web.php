@@ -67,13 +67,13 @@ Route::middleware('auth')->group(function (){
 
         
         Route::get('payment', 'MethodsPaymentController@index')->name('payment.index')
-        ->middleware('permission:create_store');
+        ->middleware('permission:view_payments');
         Route::post('payment/store', 'MethodsPaymentController@store')->name('payment.store')
-        ->middleware('permission:create_store');
+        ->middleware('permission:store_payments');
         Route::post('payment/update', 'MethodsPaymentController@update')->name('payment.update')
-        ->middleware('permission:update_store');
+        ->middleware('permission:update_payments');
         Route::post('payment/destroy', 'MethodsPaymentController@destroy')->name('payment.destroy')
-        ->middleware('permission:destroy_store');
+        ->middleware('permission:delete_payments');
     });
 });
 

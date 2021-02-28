@@ -33,9 +33,11 @@
 @endsection
 
 @section('content')
+    @can('store_payments')
     <a id="newPayment" class="btn btn-success">
         <i class="icon-2x fa fa-plus"></i> Nuevo metodo de Pago
     </a>
+    @endcan
     <hr>
     <table class="table">
         <thead>
@@ -67,9 +69,13 @@
             <ul>
             </td>
             <td>
-                <a data-edit="{{ $metod->id }}" data-image="{{ $metod->image }}"  data-name="{{ $metod->name }}"   class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                <a data-delete="{{ $metod->id }}"  data-image="{{ $metod->image }}"  data-name="{{ $metod->name }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-
+            @can('update_payments')
+            <a data-edit="{{ $metod->id }}" data-image="{{ $metod->image }}"  data-name="{{ $metod->name }}"   class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>           
+            @endcan
+            @can('delete_payments')
+            <a data-delete="{{ $metod->id }}"  data-image="{{ $metod->image }}"  data-name="{{ $metod->name }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+            @endcan
+               
             </td>
         </tr>
         @endforeach

@@ -53,6 +53,28 @@ class PermissionSeeder extends Seeder
                                                  // Restaurar la tienda
         ]);
 
+         // Módulo metodos de pago
+
+        Permission::create([
+            'name' => 'view_payments',
+            'description' => 'Visualizar lista de metodos de pagos'
+        ]);
+
+        Permission::create([
+            'name' => 'store_payments',
+            'description' => 'Guardar metodos de pagos'
+        ]);
+
+        Permission::create([
+            'name' => 'delete_payments',
+            'description' => 'Eliminar metodos de pagos'
+        ]);
+
+        Permission::create([
+            'name' => 'update_payments',
+            'description' => 'Actualizar metodos de pagos' 
+        ]);
+
         // Módulo Categorías
         // Módulo Productos
         // Módulo Clientes

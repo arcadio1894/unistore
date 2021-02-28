@@ -232,42 +232,27 @@
 
                 </ul>
             </li>
+            @can('view_payments')
             <li class=" @yield('openModCategory') ">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-credit-card"></i>
                     <span class="menu-text">
                         M. Pagos
                     </span>
-
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
-
                 <b class="arrow"></b>
-
                 <ul class="submenu">
-
                     <li class=" @yield('activeListCategory') ">
                         <a href="{{ route('payment.index') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Listar Pagos
                         </a>
-
                         <b class="arrow"></b>
-
                     </li>
-
-                   <!-- <li class=" @yield('activeRestoreCategory') ">
-                        <a href="#">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Restaurar Categorías
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>-->
-
                 </ul>
             </li>
-
+            @endcan
             <li class=" @yield('activeMod') ">
                 <a href="#">
                     <i class="menu-icon fa fa-file-pdf-o"></i>
