@@ -16,7 +16,6 @@ class PermissionSeeder extends Seeder
             'name' => 'access_dashboard',
             'description' => 'Acceder al dashboard' // Permiso para acceder al dashboard
         ]);
-
         // Módulo Permisos
         Permission::create([
             'name' => 'access_permission',
@@ -53,12 +52,37 @@ class PermissionSeeder extends Seeder
                                                  // Restaurar la tienda
         ]);
 
+
+         // Módulo Método Envío
+
+        Permission::create([
+            'name' => 'view_shipping',
+            'description' => 'Visualizar lista de envios'
+        ]);
+
+        Permission::create([
+            'name' => 'store_shipping',
+            'description' => 'Guardar metodos de envios'
+        ]);
+
+        Permission::create([
+            'name' => 'update_shipping',
+            'description' => 'Actualizar metodos de envios' 
+        ]);
+
+        Permission::create([
+            'name' => 'delete_shipping',
+            'description' => 'Eliminar metodos de envios'
+        ]);
+
+        
+
         // Módulo Categorías
         // Módulo Productos
         // Módulo Clientes
         // Módulo Pedidos
         // Módulo Método Pago
-        // Módulo Método Envío
+       
 
     }
 }
