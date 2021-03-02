@@ -232,7 +232,43 @@
 
                 </ul>
             </li>
+            @can('view_shipping')
+            <li class=" @yield('openModMethodShip') ">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-truck"></i> 
+                    <span class="menu-text">
+                        M. Envios
+                    </span>
 
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+                    <li class=" @yield('activeListMethodShip') ">
+                        <a href="{{ route('method_ship.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Listar Envios
+                        </a>
+
+                        <b class="arrow"></b>
+
+                    </li>
+
+                    <li class=" @yield('activeRestoreMethodShip') ">
+                        <a href="#">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Restaurar Envios
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            @endcan
             <li class=" @yield('activeMod') ">
                 <a href="#">
                     <i class="menu-icon fa fa-file-pdf-o"></i>
