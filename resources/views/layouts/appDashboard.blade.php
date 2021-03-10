@@ -315,6 +315,37 @@
                 </ul>
             </li>
             @endcan
+
+
+            @can('create_store')
+                <li class=" @yield('openModCustomer') ">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-users"></i>
+                        <span class="menu-text">
+                        M. Clientes
+                    </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+
+                        <li class=" @yield('activeListCustomers') ">
+                            <a href="{{ route('customer.index') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Clientes
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+
+                    </ul>
+                </li>
+            @endcan
+
+
             <li class=" @yield('activeMod') ">
                 <a href="#">
                     <i class="menu-icon fa fa-file-pdf-o"></i>

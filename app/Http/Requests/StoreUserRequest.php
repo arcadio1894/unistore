@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
             'dni' => 'required|string|size:8|unique:users,dni',
             'email' => 'required|string|email|max:255|unique:users,email',
             'image' => 'image'
+
         ];
     }
 

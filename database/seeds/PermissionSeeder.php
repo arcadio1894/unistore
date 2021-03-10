@@ -106,6 +106,22 @@ class PermissionSeeder extends Seeder
         // Módulo Categorías
         // Módulo Productos
         // Módulo Clientes
+        Permission::create([
+            'name' => 'list_customer',
+            'description' => 'Listar clientes' // Permiso para gestionar roles y permisos
+        ]);
+        Permission::create([
+            'name' => 'create_customer',
+            'description' => 'Crear clientes' // Permiso para gestionar roles y permisos
+        ]);
+        Permission::create([
+            'name' => 'update_customer',
+            'description' => 'Modificar clientes' // Permiso para gestionar roles y permisos
+        ]);
+        Permission::create([
+            'name' => 'destroy_customer',
+            'description' => 'Eliminar clientes' // Permiso para gestionar roles y permisos
+        ]);
         // Módulo Pedidos
         // Módulo Método Pago
         // Módulo Método Envío

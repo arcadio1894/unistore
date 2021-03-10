@@ -47,6 +47,12 @@ class RoleSeeder extends Seeder
             'create_permission',
             'update_permission',
             'destroy_permission',
+            'list_customer',
+            'create_customer',
+            'update_customer',
+            'destroy_customer',
+
+
         ]);
 
         $roleM->givePermissionTo([
