@@ -18,6 +18,6 @@ class ShopSeeder extends Seeder
             'phone' => '+51 985412547'
         ]);
 
-        factory(Shop::class, 50)->create();
+        factory(Shop::class, 500)->create();
     }
 }

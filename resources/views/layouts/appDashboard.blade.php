@@ -232,6 +232,7 @@
 
                 </ul>
             </li>
+
             @can('view_payments')
             <li class=" @yield('openModCategory') ">
                 <a href="#" class="dropdown-toggle">
@@ -250,11 +251,125 @@
                         </a>
                         <b class="arrow"></b>
                     </li>
+
+                </ul>
+            </li>
+            @endcan
+            @can('view_shipping')
+            <li class=" @yield('openModMethodShip') ">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-truck"></i> 
+                    <span class="menu-text">
+                        M. Envios
+                    </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+                    <li class=" @yield('activeListMethodShip') ">
+                        <a href="{{ route('method_ship.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Listar Envios
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class=" @yield('activeRestoreMethodShip') ">
+                        <a href="#">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Restaurar Envios
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+            @can('create_store')
+                <li class=" @yield('openModProduct') ">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-shopping-basket"></i>
+                        <span class="menu-text">
+                        M. Productos
+                    </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+
+                        <li class=" @yield('activeListProduct') ">
+                            <a href="{{ route('product.index') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Listar Productos
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class=" @yield('activeCreateProduct') ">
+                            <a href="{{ route('product.create') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Crear Producto
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+
+                    </ul>
+                </li>
+            @endcan
+            @can('access_permission')
+            <li class=" @yield('openModAccess') ">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text">
+                        M. Accesos
+                    </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+                    <li class=" @yield('activeListPermission') ">
+                        <a href="{{ route('permission.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Permisos
+
+                        </a>
+
+                        <b class="arrow"></b>
+
+                    </li>
+
+                    <li class=" @yield('activeListRoles') ">
+                        <a href="{{ route('role.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Roles
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class=" @yield('activeListUsers') ">
+                        <a href="{{ route('user.index') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Usuarios
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
                 </ul>
             </li>
             @endcan
             <li class=" @yield('activeMod') ">
-                <a href="#">
+                <a href="{{ route('middleware.check') }}">
                     <i class="menu-icon fa fa-file-pdf-o"></i>
                     <span class="menu-text">
                         Nuevo

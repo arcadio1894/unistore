@@ -34,18 +34,18 @@
 @endsection
 
 @section('content')
-    <table class="table">
+    <table class="table" id="dynamic-table">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Dirección</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Acciones</th>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        @foreach( $shops as $shop )
+        {{--@foreach( $shops as $shop )
         <tr>
             <th scope="row">{{ $shop->id }}</th>
             <td>{{ $shop->name }}</td>
@@ -60,7 +60,7 @@
                 @endcan
             </td>
         </tr>
-        @endforeach
+        @endforeach--}}
         </tbody>
     </table>
     @can('destroy_store')
@@ -91,5 +91,13 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('intranet/assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('intranet/assets/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('js/shop/delete.js') }}"></script>
 @endsection

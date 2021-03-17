@@ -29,9 +29,9 @@ class Shop extends Model
         return $this->hasMany('App\MethodShipping');
     }
 
-    public function shops()
+    public function products()
     {
-        return $this->hasMany('App\Shop');
+        return $this->hasMany('App\Product');
     }
 
 }
