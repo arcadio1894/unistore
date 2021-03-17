@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     protected $fillable = ['name', 'description', 'stock', 'unit_price', 'shop_id'];
 
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     // TODO: Relaciones
     public function images()
     {
@@ -41,7 +45,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category')->withPivot('category_id');
+        return $this->belongsToMany('App\Category', 'category_products')->withPivot('category_id');
     }
 
     public function shop()

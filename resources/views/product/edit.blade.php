@@ -8,7 +8,7 @@
     open
 @endsection
 
-@section('activeCreateProduct')
+@section('activeLisProduct')
     active
 @endsection
 
@@ -23,7 +23,7 @@
                 <i class="ace-icon fa fa-shopping-basket"></i>
                 <a href="{{ route('product.index') }}">Productos</a>
             </li>
-            <li class="active">Crear Producto</li>
+            <li class="active">{{ $product->name }}</li>
         </ul><!-- /.breadcrumb -->
 
         <div class="nav-search" id="nav-search">
@@ -38,11 +38,11 @@
 @endsection
 
 @section('content')
-    <form class="form-horizontal" id="formCreate" data-url="{{ route('product.store') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" id="formEdit" data-url="{{ route('product.update') }}" enctype="multipart/form-data">
         @csrf
         <h4 class="lighter">
             <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-            Mantenedor de Productos
+            Modificación de Productos
         </h4>
 
         <div class="hr hr-18 hr-double dotted"></div>
@@ -80,18 +80,19 @@
                             <div class="step-pane active" data-step="1">
                                 <div class="center">
                                     <div class="col-md-6">
+                                        <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label no-padding-right" for="name"> Nombre del producto </label>
 
                                             <div class="col-sm-8">
-                                                <input type="text" id="name" name="name" placeholder="Ejm: Laptop Lenovo" class="col-xs-10 col-sm-10" required />
+                                                <input type="text" id="name" name="name" placeholder="Ejm: Laptop Lenovo" class="col-xs-10 col-sm-10" value="{{ $product->name }}" required />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label no-padding-right" for="description"> Descripción </label>
 
                                             <div class="col-sm-8">
-                                                <input type="text" id="description" name="description" placeholder="Ejm: Laptop ...." class="col-xs-10 col-sm-10" required />
+                                                <input type="text" id="description" name="description" placeholder="Ejm: Laptop ...." class="col-xs-10 col-sm-10" value="{{ $product->description }}" required />
                                             </div>
                                         </div>
                                     </div>
@@ -100,14 +101,14 @@
                                             <label class="col-sm-4 control-label no-padding-right" for="stock"> Existencias  </label>
 
                                             <div class="col-sm-8">
-                                                <input type="text" id="stock" name="stock" placeholder="Ejm: CompuPlaza" class="col-xs-10 col-sm-10" required />
+                                                <input type="text" id="stock" name="stock" placeholder="Ejm: 100" class="col-xs-10 col-sm-10" value="{{ $product->stock }}" required />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label no-padding-right" for="unit_price"> Precio unitario </label>
 
                                             <div class="col-sm-8">
-                                                <input type="text" id="unit_price" name="unit_price" placeholder="Ejm: 100.00" class="col-xs-10 col-sm-10" required />
+                                                <input type="text" id="unit_price" name="unit_price" placeholder="Ejm: 100.00" class="col-xs-10 col-sm-10" value="{{ $product->unit_price }}" required />
                                             </div>
                                         </div>
                                     </div>
@@ -119,7 +120,11 @@
                                                 <select name="shop" id="shop" class="select2" data-placeholder="Seleccione una tienda ...">
                                                     <option value=""> </option>
                                                     @foreach( $shops as $shop )
-                                                        <option value="{{ $shop->id }}">{{ $shop->name }}</option>
+                                                        @if( $shop->id == $product->shop->id )
+                                                            <option value="{{ $shop->id }}" selected>{{ $shop->name }}</option>
+                                                        @else
+                                                            <option value="{{ $shop->id }}">{{ $shop->name }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -131,17 +136,7 @@
                                             Especificaciones del producto
                                         </h4>
                                         <div class="form-group">
-                                            <div class="col-sm-5">
-                                                <div class="col-sm-12">
-                                                    <input type="text" name="infos[]" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="col-sm-12">
-                                                    <input type="text" name="specifications[]" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-2 col-md-offset-5">
                                                 <button type="button" id="btnNew" class="btn btn-success btn-xs"><i class="ace-icon fa fa-plus icon-animated-hand-pointer with"></i>Agregar</button>
                                             </div>
                                         </div>
@@ -150,12 +145,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-5">
                                                     <div class="col-sm-12">
-                                                        <input type="text" name="infos[]" class="form-control" />
+                                                        <input type="text" data-specification name="infos[]" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <div class="col-sm-12">
-                                                        <input type="text" name="specifications[]" class="form-control" />
+                                                        <input type="text" data-content name="specifications[]" class="form-control" />
                                                     </div>
                                                 </div>
 
@@ -172,12 +167,23 @@
                             <div class="step-pane" data-step="2">
                                 <div class="left">
                                     @foreach( $categories as $category )
+                                        @if(in_array($category->id,$cats ))
+                                        <div class="checkbox">
+                                            <label class="block">
+                                                <input name="categories[]" value="{{ $category->id }}" type="checkbox" checked class="ace input-lg">
+                                                <span class="lbl bigger-120">   {{ $category->name }}</span>
+                                            </label>
+                                        </div>
+                                        @else
+
                                         <div class="checkbox">
                                             <label class="block">
                                                 <input name="categories[]" value="{{ $category->id }}" type="checkbox" class="ace input-lg">
                                                 <span class="lbl bigger-120">   {{ $category->name }}</span>
                                             </label>
                                         </div>
+                                        @endif
+
                                     @endforeach
                                 </div>
                             </div>
@@ -190,31 +196,39 @@
                                             Imágenes del producto
                                         </h4>
                                         <div class="form-group">
-                                            <div class="col-sm-5">
-                                                <div class="col-xs-12">
-                                                    <input type="file" name="images[]" accept="image/jpeg,image/png,image/jpg" class="file-input" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="col-sm-12">
-                                                    <input type="text" name="alts[]" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-2 col-md-offset-5">
                                                 <button type="button" id="btnImage" class="btn btn-success btn-xs"><i class="ace-icon fa fa-plus icon-animated-hand-pointer with"></i>Agregar</button>
                                             </div>
                                         </div>
                                         <div id="body-images"></div>
-                                        <template id="template-image">
+                                        <template id="template-image-old">
                                             <div class="form-group">
                                                 <div class="col-sm-5">
-                                                    <div class="col-sm-12">
-                                                        <input type="file" name="images[]" accept="image/jpeg,image/png,image/jpg" class="file-input" />
+                                                    <div class="col-sm-12 center">
+                                                        <img data-imageOld width="50px" height="50px">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <div class="col-sm-12">
-                                                        <input type="text" name="alts[]" class="form-control" />
+                                                        <input type="text" data-alt class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-2">
+                                                    <button type="button" data-deleteImage class="btn btn-danger btn-xs"><i class="ace-icon fa fa-trash icon-animated-hand-pointer with"></i></button>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template id="template-image">
+                                            <div class="form-group">
+                                                <div class="col-sm-5">
+                                                    <div class="col-sm-12">
+                                                        <input type="file" data-image-new name="images[]" accept="image/jpeg,image/png,image/jpg" class="file-input" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" data-alt name="alts[]" class="form-control" />
                                                     </div>
                                                 </div>
 
@@ -278,14 +292,14 @@
                     // Enviar la información con ajax
 
                     // Obtener la URL
-                    var formCreate = $('#formCreate');
-                    var createUrl = formCreate.data('url');
+                    var formEdit = $('#formEdit');
+                    var editUrl = formEdit.data('url');
 
-                    console.log(createUrl);
+                    console.log(editUrl);
                     $.ajax({
-                        url: createUrl,
+                        url: editUrl,
                         method: 'POST',
-                        data: new FormData(formCreate[0]),
+                        data: new FormData(formEdit[0]),
                         processData:false,
                         contentType:false,
                         success: function (data) {
@@ -357,5 +371,5 @@
             });
         })
     </script>
-    <script src="{{ asset('js/product/create.js') }}"></script>
+    <script src="{{ asset('js/product/edit.js') }}"></script>
 @endsection

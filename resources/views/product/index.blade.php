@@ -62,7 +62,7 @@
             <td>{{ $product->shop->name }}</td>
             <td>
                 @foreach( $product->categories as $category )
-                    <p> {{ $category->pivot->name }} </p>
+                    <p> {{ $category->name }} </p>
                 @endforeach
             </td>
             <td>

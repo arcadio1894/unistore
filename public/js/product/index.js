@@ -20,17 +20,15 @@ var $modalDelete;
 function openModal() {
     var id = $(this).data('delete');
     var name = $(this).data('name');
-    var address = $(this).data('address');
-    var phone = $(this).data('phone');
+    var description = $(this).data('description');
 
     //console.log($(this).data('name'));
 
     // Si es input se usa .val()
-    $modalDelete.find('[id=id_shop]').val(id);
+    $modalDelete.find('[id=product_id]').val(id);
     // Si es cualquier otra etiqueta se usa .html
     $modalDelete.find('[id=nameDelete]').html(name);
-    $modalDelete.find('[id=addressDelete]').html(address);
-    $modalDelete.find('[id=phoneDelete]').html(phone);
+    $modalDelete.find('[id=descriptionDelete]').html(description);
 
     $modalDelete.modal('show');
 }
@@ -47,39 +45,38 @@ function sendData() {
         contentType:false,
         success: function (data) {
             console.log(data);
-            if (data != "") {
-                for ( var property in data )  {
-                    $.toast({
-                        text:data[property],
-                        showHideTransition: 'slide',
-                        bgColor: '#D15B47',
-                        allowToastClose: false,
-                        hideAfter: 4000,
-                        stack: 10,
-                        textAlign: 'left',
-                        position: 'top-right',
-                        icon: 'error',
-                        heading: 'Error'
-                    })
-                }
-            } else {
+            $.toast({
+                text: data.message,
+                showHideTransition: 'slide',
+                bgColor: '#629B58',
+                allowToastClose: false,
+                hideAfter: 4000,
+                stack: 10,
+                textAlign: 'left',
+                position: 'top-right',
+                icon: 'success',
+                heading: 'Éxito'
+            });
+            setTimeout( function () {
+                location.reload();
+            }, 4000 )
+        },
+        error: function (data) {
+            console.log(data);
+            for ( var property in data.responseJSON.errors ) {
                 $.toast({
-                    text: 'Tienda eliminada correctamente.',
+                    text:data.responseJSON.errors[property],
                     showHideTransition: 'slide',
-                    bgColor: '#629B58',
+                    bgColor: '#D15B47',
                     allowToastClose: false,
                     hideAfter: 4000,
                     stack: 10,
                     textAlign: 'left',
                     position: 'top-right',
-                    icon: 'success',
-                    heading: 'Éxito'
+                    icon: 'error',
+                    heading: 'Error'
                 });
-                $modalDelete.modal('hide');
-                setTimeout( function () {
-                    location.reload();
-                }, 4000 )
             }
-        }
+        },
     });
 }

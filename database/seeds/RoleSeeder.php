@@ -35,6 +35,12 @@ class RoleSeeder extends Seeder
             'update_store',
             'destroy_store',
             'restore_store',
+
+            'view_shipping',
+            'store_shipping',
+            'update_shipping',
+            'delete_shipping'
+
             'list_user',
             'create_user',
             'update_user',
@@ -47,11 +53,11 @@ class RoleSeeder extends Seeder
             'create_permission',
             'update_permission',
             'destroy_permission',
+
             'list_customer',
             'create_customer',
             'update_customer',
             'destroy_customer',
-
 
         ]);
 

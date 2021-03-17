@@ -17,7 +17,7 @@ class Sale extends Model
 
     public function payment()
     {
-        return $this->belongsTo('App\MethodPayment');
+        return $this->belongsTo('App\MethodsPayment');
     }
 
     public function shipping()

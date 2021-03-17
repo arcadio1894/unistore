@@ -56,4 +56,9 @@ class PermissionController extends Controller
         return response()->json(['message' => 'Role eliminado con éxito.'], 200);
 
     }
+
+    public function middlewareCheck()
+    {
+        dd('Si estas viendo esta vista, entonces has pasado el middleware');
+    }
 }
