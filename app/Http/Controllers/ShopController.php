@@ -159,4 +159,10 @@ class ShopController extends Controller
 
         return response()->json($validator->messages(), 200);
     }
+
+    public function getShops()
+    {
+        $shops = Shop::select('id', 'name', 'address', 'phone')->get();
+        return datatables($shops)->toJson();
+    }
 }

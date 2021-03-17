@@ -4,11 +4,11 @@
 
 @endsection
 
-@section('openModShop')
+@section('openModProduct')
     open
 @endsection
 
-@section('activeListShop')
+@section('activeListProduct')
     active
 @endsection
 
@@ -19,7 +19,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{ route('dashboard') }}">Inicio</a>
             </li>
-            <li class="active">Listado de Tiendas</li>
+            <li class="active">Listado de Productos</li>
         </ul><!-- /.breadcrumb -->
 
         <div class="nav-search" id="nav-search">
@@ -34,33 +34,47 @@
 @endsection
 
 @section('content')
-    <table class="table" id="dynamic-table">
+    <a href="{{ route('product.create') }}" class="btn btn-success">
+        <i class="icon-2x fa fa-plus"></i> Nueva Producto
+    </a>
+    <hr>
+    <table class="table">
         <thead>
         <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
+            <th>Producto</th>
+            <th>Descripción</th>
+            <th>Stock</th>
+            <th>Precio Unitario</th>
+            <th>Tienda</th>
+            <th>Categorías</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        {{--@foreach( $shops as $shop )
+        @foreach( $products as $product )
         <tr>
-            <th scope="row">{{ $shop->id }}</th>
-            <td>{{ $shop->name }}</td>
-            <td>{{ $shop->address }}</td>
-            <td>{{ $shop->phone }}</td>
+            <th scope="row">{{ $product->id }}</th>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->description }}</td>
+            <td>{{ $product->stock }}</td>
+            <td>{{ $product->unit_price }}</td>
+            <td>{{ $product->shop->name }}</td>
+            <td>
+                @foreach( $product->categories as $category )
+                    <p> {{ $category->name }} </p>
+                @endforeach
+            </td>
             <td>
                 @can('edit_store')
-                <a href="{{ route('shop.edit', $shop->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                <a href="{{ route('product.edit', $product->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                 @endcan
                 @can('destroy_store')
-                <a data-delete="{{ $shop->id }}" data-phone="{{ $shop->phone }}" data-address="{{ $shop->address }}" data-name="{{ $shop->name }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                <a data-delete="{{ $product->id }}" data-description="{{ $product->description }}" data-name="{{ $product->name }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                 @endcan
             </td>
         </tr>
-        @endforeach--}}
+        @endforeach
         </tbody>
     </table>
     @can('destroy_store')
@@ -71,13 +85,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Confirmar eliminación</h4>
                 </div>
-                <form id="formDelete" data-url="{{ route('shop.destroy') }}">
+                <form id="formDelete" data-url="{{ route('product.destroy') }}">
                     @csrf
                     <div class="modal-body">
-                        <input type="hidden" id="id_shop" name="id">
+                        <input type="hidden" id="product_id" name="product_id">
                         <p id="nameDelete"></p>
-                        <p id="addressDelete"></p>
-                        <p id="phoneDelete"></p>
+                        <p id="descriptionDelete"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -91,13 +104,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('intranet/assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('intranet/assets/js/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('js/shop/delete.js') }}"></script>
+    <script src="{{ asset('js/product/index.js') }}"></script>
 @endsection

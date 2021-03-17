@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function (){
         // Destroy: Eliminar la tienda
         Route::post('shop/destroy', 'ShopController@destroy')->name('shop.destroy')
             ->middleware('permission:destroy_store');
+        Route::get('/all/shops', 'ShopController@getShops')->name('shop.get');
 
         // Trashed: Devuelve las tiendas eliminadas
         Route::get('tiendas/eliminadas', 'ShopController@trashed')->name('shop.trashed')
@@ -64,6 +65,7 @@ Route::middleware('auth')->group(function (){
         Route::post('category/destroy', 'CategoryController@destroy')->name('category.destroy')
             ->middleware('permission:destroy_store');
 
+
         // TODO: Rutas módulo Envios
         // Index: Muestra el listado de envios
         Route::get('envios', 'MethodShippingController@index')->name('method_ship.index')
@@ -76,8 +78,70 @@ Route::middleware('auth')->group(function (){
            ->middleware('permission:delete_shipping');
 
 
-        
+        // TODO: Rutas módulo Accesos
+        Route::get('usuarios', 'UserController@index')->name('user.index')
+            ->middleware('permission:list_user');
+        Route::post('user/store', 'UserController@store')->name('user.store')
+            ->middleware('permission:create_user');
+        Route::post('user/update', 'UserController@update')->name('user.update')
+            ->middleware('permission:update_user');
+        Route::get('user/roles/{id}', 'UserController@getRoles')->name('user.roles')
+            ->middleware('permission:update_user');
+        Route::post('user/destroy', 'UserController@destroy')->name('user.destroy')
+            ->middleware('permission:destroy_user');
+
+        Route::get('roles', 'RoleController@index')->name('role.index')
+            ->middleware('permission:list_role');
+        Route::post('role/store', 'RoleController@store')->name('role.store')
+            ->middleware('permission:create_role');
+        Route::post('role/update', 'RoleController@update')->name('role.update')
+            ->middleware('permission:update_role');
+        Route::get('role/permissions/{id}', 'RoleController@getPermissions')->name('role.permissions')
+            ->middleware('permission:update_role');
+        Route::post('role/destroy', 'RoleController@destroy')->name('role.destroy')
+            ->middleware('permission:destroy_role');
+
+        Route::get('permisos', 'PermissionController@index')->name('permission.index')
+            ->middleware('permission:list_permission');
+        Route::post('permission/store', 'PermissionController@store')->name('permission.store')
+            ->middleware('permission:create_permission');
+        Route::post('permission/update', 'PermissionController@update')->name('permission.update')
+            ->middleware('permission:update_permission');
+        Route::post('permission/destroy', 'PermissionController@destroy')->name('permission.destroy')
+            ->middleware('permission:destroy_permission');
+
+        // TODO: Rutas módulo Productos
+        // Index: Muestra el listado de productos
+        Route::get('productos', 'ProductController@index')->name('product.index')
+            ->middleware('permission:create_store');
+        // Create: Muestra el formulario de creación
+        Route::get('producto/crear', 'ProductController@create')->name('product.create')
+            ->middleware('permission:create_store');
+        // Store: Guarda en la BD el producto
+        Route::post('product/store', 'ProductController@store')->name('product.store')
+            ->middleware('permission:save_store');
+        // Edit: Mostrar el formulario de actualización
+        Route::get('producto/actualizar/{id}', 'ProductController@edit')->name('product.edit')
+            ->middleware('permission:edit_store');
+        // Update: Guarda la nueva información del producto
+        Route::post('product/update', 'ProductController@update')->name('product.update')
+            ->middleware('permission:update_store');
+        // Destroy: Eliminar el producto
+        Route::post('product/destroy', 'ProductController@destroy')->name('product.destroy')
+            ->middleware('permission:destroy_store');
+        Route::get('/obtener/infos/{idProduct}', 'ProductController@getInfo')
+            ->middleware('permission:edit_store');
+        Route::get('/obtener/images/{idProduct}', 'ProductController@getImages')
+            ->middleware('permission:edit_store');
+        Route::get('/delete/images/{idImage}', 'ProductController@deleteImages')
+            ->middleware('permission:edit_store');
+
     });
+
+    Route::get('middleware/check', 'PermissionController@middlewareCheck')
+        ->name('middleware.check')
+        ->middleware('middlewareCheck:20,view');
+
 });
 
 // Customer

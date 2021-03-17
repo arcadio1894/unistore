@@ -21,7 +21,7 @@ class Category extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot('product_id');
+        return $this->belongsToMany('App\Product', 'category_products')->withPivot('product_id');
     }
 
 }

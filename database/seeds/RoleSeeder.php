@@ -35,10 +35,25 @@ class RoleSeeder extends Seeder
             'update_store',
             'destroy_store',
             'restore_store',
+
             'view_shipping',
             'store_shipping',
             'update_shipping',
             'delete_shipping'
+
+            'list_user',
+            'create_user',
+            'update_user',
+            'destroy_user',
+            'list_role',
+            'create_role',
+            'update_role',
+            'destroy_role',
+            'list_permission',
+            'create_permission',
+            'update_permission',
+            'destroy_permission',
+
         ]);
 
         $roleM->givePermissionTo([
