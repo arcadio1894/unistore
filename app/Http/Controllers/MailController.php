@@ -23,6 +23,7 @@ class MailController extends Controller
             'name' => 'required',
             'phone' => 'required',
         ]);
+
         $attribute = array(
             'message'   =>   $request->input('message'),
             'email'      =>  $request->input('email'),
@@ -32,8 +33,5 @@ class MailController extends Controller
         Mail::to('joryes1894@gmail.com')->send(new MailContactMail($attribute));
       
         return back()->with('success', 'Mensaje enviado exitosamente!');
-
-
-
     }
 }
