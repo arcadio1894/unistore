@@ -23,7 +23,6 @@ class MailController extends Controller
             'name' => 'required',
             'phone' => 'required',
         ]);
-
         $attribute = array(
             'message'   =>   $request->input('message'),
             'email'      =>  $request->input('email'),

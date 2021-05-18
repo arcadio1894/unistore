@@ -25,6 +25,6 @@ class MailContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.mailContact')->subject('Mensaje de prueba unistore');
+        return $this->view('emails.mailContact')->subject('Mensaje de prueba unistore trabajo dos');
     }
 }

@@ -38,7 +38,6 @@
       <strong>{{ $message }}</strong>
    </div>
    @endif
-
     <div class="gray">
         <div class="container align-center">
             <h1> Need our help? </h1>

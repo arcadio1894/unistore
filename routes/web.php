@@ -96,7 +96,6 @@ Route::get('/contacto', 'MailController@showContact')
 Route::post('/contacto', 'MailController@showContactStore')
 ->name('show.contact.store');
 
-
 // Customer
 // Customer_address
 // method_payment
