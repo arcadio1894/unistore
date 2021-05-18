@@ -252,6 +252,9 @@ Route::get('/product/detail/{idProduct}', 'ProductController@getProductById')
 Route::get('/contacto', 'MailController@showContact')
     ->name('show.contact');
 
+Route::post('/contacto', 'MailController@storeContact')
+    ->name('store.contact');
+
 
 // Customer
 // Customer_address
