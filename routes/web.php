@@ -80,6 +80,26 @@ Route::middleware('auth')->group(function (){
     });
 });
 
+<<<<<<< Updated upstream
+=======
+Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider')
+    ->name('social.auth');
+Route::get('auth/{provider}/callback', 'SocialAuthController@handleProviderCallback');
+
+Route::get('/catalogo/', 'ProductController@catalog')
+    ->name('landing.catalog');
+Route::get('/landing/get/products/', 'ProductController@getProducts');
+
+Route::get('/product/detail/{idProduct}', 'ProductController@getProductById')
+    ->name('landing.detail');
+
+Route::get('/contacto', 'MailController@showContact')
+    ->name('show.contact');
+Route::post('/contacto', 'MailController@showContactStore')
+->name('show.contact.store');
+
+
+>>>>>>> Stashed changes
 // Customer
 // Customer_address
 // method_payment
