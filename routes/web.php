@@ -80,8 +80,6 @@ Route::middleware('auth')->group(function (){
     });
 });
 
-<<<<<<< Updated upstream
-=======
 Route::get('auth/{provider}', 'SocialAuthController@redirectToProvider')
     ->name('social.auth');
 Route::get('auth/{provider}/callback', 'SocialAuthController@handleProviderCallback');
@@ -99,7 +97,6 @@ Route::post('/contacto', 'MailController@showContactStore')
 ->name('show.contact.store');
 
 
->>>>>>> Stashed changes
 // Customer
 // Customer_address
 // method_payment
