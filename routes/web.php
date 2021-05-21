@@ -249,9 +249,14 @@ Route::get('/landing/get/products/', 'ProductController@getProducts');
 Route::get('/product/detail/{idProduct}', 'ProductController@getProductById')
     ->name('landing.detail');
 
+
+    //TODO:Rutas del Contacto
+
 Route::get('/contacto', 'MailController@showContact')
     ->name('show.contact');
 
+Route::post('/contacto', 'MailController@storeContact')
+    ->name('store.contact');
 
 // Customer
 // Customer_address
