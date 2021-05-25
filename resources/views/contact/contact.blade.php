@@ -37,18 +37,21 @@
         <div class="container align-center">
             <h1> Need our help? </h1>
             <p> Please select a question above first so we can connect you <br class="visible-md visible-lg"> to the right agent. </p>
-
+            <h1> Información del Cliente </h1>
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-4">
-                    <form class="contact" action="#" method="post">
+                    <form id="formContact" class="contact" action="{{route('store.contact')}}" method="post">
                         @csrf
-                        <textarea class="form-control" name="message" placeholder="Message" required="" rows="5"></textarea>
+                        <input type="text" name="name" value="" placeholder="Nombre del Cliente" required="" class="form-control" />
                         <br>
-
                         <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control" />
                         <br>
+                        <input type="text" name="affair" value="" placeholder="Asunto" required="" class="form-control" />
+                        <br>
+                        <textarea class="form-control" name="message" placeholder="Mensaje" required="" rows="5"></textarea>
+                        <br>
 
-                        <button type="submit" class="btn btn-primary justify"> Send question <i class="ion-android-send"></i> </button>
+                        <button type="submit" class="btn btn-primary justify"> Enviar <i class="ion-android-send"></i> </button>
                     </form>
                 </div>
             </div>
@@ -57,4 +60,7 @@
     </div>
     <hr class="offset-lg">
     <hr class="offset-lg">
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/contact/index.js') }}"></script>
 @endsection
