@@ -208,6 +208,3 @@
     </div>
 @endsection
 
-@section('scripts')
-    <script src="{{ asset('js/category/index.js') }}"></script>
-@endsection
