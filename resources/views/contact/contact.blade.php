@@ -32,6 +32,13 @@
         </div>
         <br>
     </div>
+  
+   @if ($message = Session::get('success'))
+   <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $message }}</strong>
+   </div>
+   @endif
 
     <div class="gray">
         <div class="container align-center">
@@ -40,8 +47,11 @@
 
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-4">
-                    <form class="contact" action="#" method="post">
+                    <form class="contact" action="{{route('contact.sendMail')}}" method="post">
                         @csrf
+                        <input type="text" name="name" value="" placeholder="Name Contact" required="" class="form-control" />
+                        <br>
+
                         <textarea class="form-control" name="message" placeholder="Message" required="" rows="5"></textarea>
                         <br>
 

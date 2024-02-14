@@ -15,22 +15,14 @@ class CategoryMail extends Mailable
 
     public $category;
     public $user;
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+   
     public function __construct( Category $category, User $user )
     {
         $this->category = $category;
         $this->user = $user;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+   
     public function build()
     {
         return $this->view('emails.categoryCreated');
