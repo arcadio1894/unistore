@@ -255,8 +255,12 @@ Route::get('/landing/get/products/', 'ProductController@getProducts');
 Route::get('/product/detail/{idProduct}', 'ProductController@getProductById')
     ->name('landing.detail');
 
+// TODO: Ruta de envio de formulario Contacto
 Route::get('/contacto', 'MailController@showContact')
     ->name('show.contact');
+
+Route::post('/contacto', 'MailController@storeContact')
+    ->name('store.contact');
 
 
 // Customer

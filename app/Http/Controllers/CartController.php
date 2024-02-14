@@ -228,7 +228,7 @@ class CartController extends Controller
             event(new OrderConfirmed($sale, $cart, $customer));
             event(new OrderPlaced($customer->user->name, $cart->total));
             // TODO: Enviar un correo electronico al administrador
-            //Mail::to('joryes1894@gmail.com')->send( new CheckoutMail($sale, $cart, $customer) );
+            Mail::to('jezs1187@gmail.com')->send( new CheckoutMail($sale, $cart, $customer) );
 
             DB::commit();
         } catch ( \Throwable $e ) {
